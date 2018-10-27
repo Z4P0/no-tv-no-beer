@@ -3,7 +3,8 @@
 console.log('heeeeerree\'s Johnny!');
 
 var typewriter = {
-    string: 'All work and no play makes Johnny a dull boy. ',
+    string: 'All work and no play makes Johnny a dull boy.\u00A0\u00A0',
+    // string: 'All work and no play makes Johnny a dull boy.\u00A0',
     // a paragraph is the string * [1-8]
     writeParagraph: function() {
         var numberOfSentences   = typewriter.util.randomNumber(8),
@@ -21,6 +22,11 @@ var typewriter = {
 
         // append text node
         paragraphElement.appendChild(textNode);
+
+        // mess with the style
+        // ----------------------------------------
+        // line-height:
+        paragraphElement.style.lineHeight = Math.random() + 0.5;
 
         return paragraphElement;
     },
@@ -53,7 +59,7 @@ var innerHeight = window.innerHeight;
 function scrollEventHandler(scrollPosition) {
     var position = Math.ceil(scrollPosition + innerHeight);
 
-    if (position === document.body.scrollHeight) {
+    if (position + (innerHeight / 4) >= document.body.scrollHeight) {
         typewriter.write();
     }
 }

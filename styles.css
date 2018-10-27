@@ -1,8 +1,9 @@
 html {
   box-sizing: border-box;
-  font-size: 125%;
+  font-size: 138.5%;
   font-family: monospace;
-  line-height: 1.3; }
+  line-height: 1.3;
+  color: #555; }
 
 .container {
   padding: 1rem;
