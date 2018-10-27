@@ -1,41 +1,53 @@
-console.log('heres johnny');
+'use strict';
 
-var typewriter = {};
+console.log('heeeeerree\'s Johnny!');
 
-typewriter.target = document.querySelector('#main-content');
-typewriter.string = 'All work and no play makes Johnny a dull boy. ';
+var typewriter = {
+    string: 'All work and no play makes Johnny a dull boy. ',
+    // a paragraph is the string * [1-8]
+    writeParagraph: function() {
+        var numberOfSentences   = typewriter.util.randomNumber(8),
+            paragraphElement    = document.createElement('p'),
+            paragraphText       = '',
+            textNode;
 
-typewriter.util = {
-    randomNumber: function(max) {
-        return Math.floor(Math.random() * (max - 1)) + 1;
+        // generate the paragraph content
+        for (var i = 0; i < numberOfSentences; i++) {
+            paragraphText += typewriter.string;
+        }
+
+        // create a textNode with the string
+        textNode = document.createTextNode(paragraphText);
+
+        // append text node
+        paragraphElement.appendChild(textNode);
+
+        return paragraphElement;
+    },
+    write: function() {
+        var fragment            = document.createDocumentFragment(),
+            numberOfParagraphs  = typewriter.util.randomNumber(12);
+
+        // write some paragraphs
+        for (var i = 0; i < numberOfParagraphs; i++) {
+            fragment.appendChild(typewriter.writeParagraph());
+        }
+
+        // add them to the page
+        typewriter.target.appendChild(fragment);
+    },
+    util: {
+        randomNumber: function(max) {
+            return Math.floor(Math.random() * (max - 1)) + 1;
+        }
     }
-}
+};
 
-
-// a paragraph is the string * [1-8]
-typewriter.writeParagraph = function() {
-    var repeat = typewriter.util.randomNumber(8);
-    var paragraphElement = document.createElement('p');
-    var paragraphText = '';
-    for (var i = 0; i < repeat; i++) {
-        paragraphText += typewriter.string;
-    }
-    var textContent = document.createTextNode(paragraphText);
-    return paragraphElement.appendChild(textContent);
-}
-
-typewriter.write = function() {
-    var fragment = document.createDocumentFragment();
-    var numberOfParagraphs = typewriter.util.randomNumber(8);
-    for (var i = 0; i < numberOfParagraphs; i++) {
-        fragment.appendChild(typewriter.writeParagraph());
-    }
-    typewriter.target.appendChild(fragment);
-}
 
 window.addEventListener('load', function() {
-    console.log('test');
-    // typewriter.target.appendChild(typewriter.writeParagraph());
+
+    typewriter.target = document.querySelector('#main-content');
+
     typewriter.write();
     typewriter.write();
     typewriter.write();
