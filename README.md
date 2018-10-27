@@ -27,3 +27,5 @@ notes:
     centered text for lines of text
     full spread for bodies of text
   mess with margins, make them inconsistent to make people uneasy
+
+√ control the rate at which "randomness" occurs

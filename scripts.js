@@ -25,8 +25,12 @@ var typewriter = {
 
         // mess with the style
         // ----------------------------------------
-        // line-height:
-        paragraphElement.style.lineHeight = Math.random() + 0.5;
+        var random = Math.random();
+        if (random < 0.3) {
+            // line-height:
+            paragraphElement.style.lineHeight = Math.random() + 0.5;
+
+        }
 
         return paragraphElement;
     },
