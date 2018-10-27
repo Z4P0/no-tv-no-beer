@@ -24,6 +24,7 @@ var typewriter = {
 
         return paragraphElement;
     },
+    // write a page (multiple paragraphs)
     write: function() {
         var fragment            = document.createDocumentFragment(),
             numberOfParagraphs  = typewriter.util.randomNumber(12);
@@ -43,6 +44,20 @@ var typewriter = {
     }
 };
 
+var lastScrollPosition = 0;
+var ticking = false;
+
+// add this to the scrollPosition value
+var innerHeight = window.innerHeight;
+
+function scrollEventHandler(scrollPosition) {
+    var position = Math.ceil(scrollPosition + innerHeight);
+
+    if (position === document.body.scrollHeight) {
+        typewriter.write();
+    }
+}
+
 
 window.addEventListener('load', function() {
 
@@ -51,4 +66,19 @@ window.addEventListener('load', function() {
     typewriter.write();
     typewriter.write();
     typewriter.write();
+});
+
+
+window.addEventListener('scroll', function(event) {
+
+    lastScrollPosition = window.scrollY;
+
+    if (!ticking) {
+        window.requestAnimationFrame(function() {
+            scrollEventHandler(lastScrollPosition);
+            ticking = false;
+        });
+
+        ticking = true;
+    }
 });
