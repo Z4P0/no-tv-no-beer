@@ -6,7 +6,8 @@ console.log('heeeeerree\'s Johnny!');
 // scroll tracking variables
 var ticking = false,
     lastScrollPosition = 0,
-    innerHeight = 0;  // add this to the scrollPosition value
+    // innerHeight = 0;  // add this to the scrollPosition value
+    innerHeight = window.innerHeight;
 
 // typewriter object to add content to the page
 var typewriter = {
@@ -138,7 +139,8 @@ var typewriter = {
     },
     // write a page (multiple paragraphs)
     write: function() {
-        var fragment            = document.createDocumentFragment(),
+        var sectionElement      = document.createElement('section'),
+            fragment            = document.createDocumentFragment(),
             numberOfParagraphs  = typewriter.util.randomNumber(12);
 
         // write some paragraphs
@@ -146,8 +148,11 @@ var typewriter = {
             fragment.appendChild(typewriter.writeParagraph());
         }
 
+        // add to section element, which adds margin-bottom
+        sectionElement.appendChild(fragment);
+
         // add them to the page
-        typewriter.target.appendChild(fragment);
+        typewriter.target.appendChild(sectionElement);
     },
     util: {
         randomNumber: function(max) {
@@ -162,9 +167,10 @@ var typewriter = {
 };
 
 function scrollEventHandler(scrollPosition) {
-    var position = Math.ceil(scrollPosition + innerHeight);
+    var position = Math.floor(scrollPosition + innerHeight);
 
-    if (position + (innerHeight / 4) >= document.body.scrollHeight) {
+    if (position >= document.body.scrollHeight * 0.9) {
+        console.log('write');
         typewriter.write();
     }
 }
@@ -173,7 +179,6 @@ function scrollEventHandler(scrollPosition) {
 window.addEventListener('load', function() {
 
     // set some variables now that the page is ready
-    innerHeight         = window.innerHeight;
     typewriter.target   = document.querySelector('#main-content');
 
     typewriter.write();
