@@ -7,17 +7,37 @@ console.log('heeeeerree\'s Johnny!');
 var typewriter = {
     letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
     punctuation: ['.', ',', '!', '?', '...', ''],
-    words: ['All', 'work', 'and', 'no', 'play', 'makes', 'Johnny', 'a', 'dull', 'boy', '.', '\u00A0\u00A0'],
+    words: ['All', 'work', 'and', 'no', 'play', 'makes', 'Johnny', 'a', 'dull', 'boy', '.'],
     completeSentence: 'All work and no play makes Johnny a dull boy.\u00A0\u00A0',
-    writeNewWord: function(startingWord) {
-        // multiple letters:         mmakes, pllay, plaay, Alll
-        // mixed type case:          PLay, and NO play, JACa
-        // missing letters:          ma es
-        // replace letters:          dyll, bog, bot
-        // blend with next word:     Jaca
-        // other:                    ply
 
-        var newWord = startingWord;
+    writeNewWord: function(startingWord) {
+        var newWord = startingWord,
+            // grab a random character in the string
+            targetCharacter = newWord.charAt(Math.floor(Math.random() * newWord.length));
+
+        if (Math.random() < 0.8) {
+            // multiple letters:    mmakes, pllay, plaay, Alll
+            if (Math.random() < 0.2) {
+                newWord = newWord.replace(targetCharacter, targetCharacter+targetCharacter);
+            }
+            // mixed type case:     PLay, and NO play, JACa
+            if (Math.random() < 0.2) {
+                newWord = newWord.replace(targetCharacter, targetCharacter.toUpperCase());
+            }
+            // missing letters:     ma es
+            if (Math.random() < 0.2) {
+                newWord = newWord.replace(targetCharacter, ' ');
+            }
+            // replace letters:     dyll, bog, bot
+            if (Math.random() < 0.2) {
+                newWord = newWord.replace(targetCharacter, typewriter.util.randomLetter());
+            }
+            // remove letter:       ply
+            if (Math.random() < 0.2) {
+                newWord = newWord.replace(targetCharacter, '');
+            }
+        }
+
         return newWord;
     },
     writeSentence: function() {
@@ -46,21 +66,28 @@ var typewriter = {
         for (var i = 0; i < typewriter.words.length; i++) {
             roll = Math.random();
             currentWord = typewriter.words[i];
-            // add typo 40% of the time
-            if (roll < 0.4) {
-                sentence += typewriter.writeNewWord(currentWord);
-            } else {
-                sentence += currentWord;
-            }
 
-            // add a space after each word 90% of the time
-            // unless the word is boy or the double spaces at the end of words array
-            // --
-            // dullboy, noplay
-            if (currentWord !== 'boy') {
-                if (roll < 0.95) {
-                    sentence += ' ';
+            // if we're not at the end of the sentence, at the period
+            if (i !== typewriter.words.length - 1) {
+                // add typo 40% of the time
+                if (roll < 0.4) {
+                    sentence += typewriter.writeNewWord(currentWord);
+                } else {
+                    sentence += currentWord;
                 }
+
+                // add a space after each word 95% of the time
+                // unless the current word is 'boy'
+                // --
+                // dullboy, noplay
+                if (i < typewriter.words.length - 2) {
+                    if (roll < 0.95) {
+                        sentence += ' ';
+                    }
+                }
+            } else {
+                // add a double space at the end of the sentence
+                sentence += currentWord + '\u00A0\u00A0';
             }
         }
 
@@ -147,10 +174,12 @@ function scrollEventHandler(scrollPosition) {
 window.addEventListener('load', function() {
 
     typewriter.target = document.querySelector('#main-content');
+    console.log(typewriter.words.length);
+    console.log(typewriter.words.length - 3);
 
     typewriter.write();
-    typewriter.write();
-    typewriter.write();
+    // typewriter.write();
+    // typewriter.write();
 });
 
 

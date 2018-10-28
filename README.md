@@ -5,17 +5,16 @@ Page with endless paragraphs of text, based on The Shining
 --
 
 notes:
-- add typos
-  multiple letters:         mmakes, pllay, plaay, Alll
-  mixed type case:          PLay, and NO play, JACa
-  missing letters:          ma es
+√ add typos
+  √   multiple letters:         mmakes, pllay, plaay, Alll
+  √   mixed type case:          PLay, and NO play, JACa
+  √   missing letters:          ma es
   √   missing space:            dullboy, noplay
-  replace letters:          dyll, bog, bot
-  blend with next word:     Jaca
-  other:                    ply
+  √   replace letters:          dyll, bog, bot
+  √   other:                    ply
 
 - random letters out of the grid
-  "v All work.."
+  √   "v All work.."
 
 - add color variance
   > requires span tags
@@ -39,9 +38,8 @@ notes:
   mess with margins, make them inconsistent to make people uneasy
 
 requires <span/> tags:
-- typos
+- inline leading variance
   color variance
-  inline leading variance
 
 
 √ control the rate at which "randomness" occurs
