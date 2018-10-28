@@ -5,12 +5,26 @@ console.log('heeeeerree\'s Johnny!');
 // console.log('All work and no play makes Johnny a dull boy.\u00A0\u00A0'.length);
 
 var typewriter = {
-    sentence: 'All work and no play makes Johnny a dull boy.\u00A0\u00A0',
+    letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+    punctuation: ['.', ',', '!', '?', '...', ''],
+    words: ['All', 'work', 'and', 'no', 'play', 'makes', 'Johnny', 'a', 'dull', 'boy', '.', '\u00A0\u00A0'],
+    completeSentence: 'All work and no play makes Johnny a dull boy.\u00A0\u00A0',
+    writeNewWord: function(startingWord) {
+        // multiple letters:         mmakes, pllay, plaay, Alll
+        // mixed type case:          PLay, and NO play, JACa
+        // missing letters:          ma es
+        // replace letters:          dyll, bog, bot
+        // blend with next word:     Jaca
+        // other:                    ply
+
+        var newWord = startingWord;
+        return newWord;
+    },
     writeSentence: function() {
         var sentenceString = '';
         // 80% of the time we just write the regular sentence
         if (Math.random() < 0.8) {
-            sentenceString = typewriter.sentence;
+            sentenceString = typewriter.completeSentence;
         } else {
             sentenceString = typewriter.writeNewSentence();
         }
@@ -19,7 +33,46 @@ var typewriter = {
     },
     writeNewSentence: function() {
         // build a whole new string
-        var sentence = typewriter.sentence.replace('ll', 'adlk');
+        var sentence = '';
+        var currentWord = '';
+        var roll = 0;  // var to hold all random values
+
+        // add random letter before the start of the text
+        if (Math.random() < 0.1) {
+            sentence += typewriter.util.randomLetter() + ' ';
+        }
+
+        // go through the words array
+        for (var i = 0; i < typewriter.words.length; i++) {
+            roll = Math.random();
+            currentWord = typewriter.words[i];
+            // add typo 40% of the time
+            if (roll < 0.4) {
+                sentence += typewriter.writeNewWord(currentWord);
+            } else {
+                sentence += currentWord;
+            }
+
+            // add a space after each word 90% of the time
+            // unless the word is boy or the double spaces at the end of words array
+            // --
+            // dullboy, noplay
+            if (currentWord !== 'boy') {
+                if (roll < 0.95) {
+                    sentence += ' ';
+                }
+            }
+        }
+
+
+        // - add color variance
+        //   > requires span tags
+        //   ink on paper, in the film A and J seem to have been smashed on the keyboard
+        //   so they have a darker color, like more ink was applied
+
+        // - mixed leading
+        //   inline and
+
         return sentence
     },
     // a paragraph is the string * [1-8]
@@ -67,6 +120,11 @@ var typewriter = {
     util: {
         randomNumber: function(max) {
             return Math.floor(Math.random() * (max - 1)) + 1;
+        },
+        randomLetter: function() {
+            return typewriter.letters[
+                Math.floor(Math.random() * typewriter.letters.length)
+            ];
         }
     }
 };

@@ -9,7 +9,7 @@ notes:
   multiple letters:         mmakes, pllay, plaay, Alll
   mixed type case:          PLay, and NO play, JACa
   missing letters:          ma es
-  missing space:            dullboy, noplay
+  √   missing space:            dullboy, noplay
   replace letters:          dyll, bog, bot
   blend with next word:     Jaca
   other:                    ply
@@ -21,6 +21,7 @@ notes:
   > requires span tags
   ink on paper, in the film A and J seem to have been smashed on the keyboard
   so they have a darker color, like more ink was applied
+
 - mixed leading
   inline and
     > requires span tags
@@ -36,5 +37,11 @@ notes:
     centered text for lines of text
     full spread for bodies of text
   mess with margins, make them inconsistent to make people uneasy
+
+requires <span/> tags:
+- typos
+  color variance
+  inline leading variance
+
 
 √ control the rate at which "randomness" occurs
