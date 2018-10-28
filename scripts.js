@@ -2,8 +2,13 @@
 
 console.log('heeeeerree\'s Johnny!');
 
-// console.log('All work and no play makes Johnny a dull boy.\u00A0\u00A0'.length);
 
+// scroll tracking variables
+var ticking = false,
+    lastScrollPosition = 0,
+    innerHeight = 0;  // add this to the scrollPosition value
+
+// typewriter object to add content to the page
 var typewriter = {
     letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
     punctuation: ['.', ',', '!', '?', '...', ''],
@@ -156,12 +161,6 @@ var typewriter = {
     }
 };
 
-var lastScrollPosition = 0;
-var ticking = false;
-
-// add this to the scrollPosition value
-var innerHeight = window.innerHeight;
-
 function scrollEventHandler(scrollPosition) {
     var position = Math.ceil(scrollPosition + innerHeight);
 
@@ -173,9 +172,9 @@ function scrollEventHandler(scrollPosition) {
 
 window.addEventListener('load', function() {
 
-    typewriter.target = document.querySelector('#main-content');
-    console.log(typewriter.words.length);
-    console.log(typewriter.words.length - 3);
+    // set some variables now that the page is ready
+    innerHeight         = window.innerHeight;
+    typewriter.target   = document.querySelector('#main-content');
 
     typewriter.write();
     // typewriter.write();
