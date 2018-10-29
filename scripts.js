@@ -97,14 +97,13 @@ var typewriter = {
             }
         }
 
-
         // - add color variance
         //   > requires span tags
         //   ink on paper, in the film A and J seem to have been smashed on the keyboard
         //   so they have a darker color, like more ink was applied
 
         // - mixed leading
-        //   inline and
+        //   inline
 
         return sentence
     },
@@ -117,6 +116,10 @@ var typewriter = {
         // generate the paragraph content
         for (var i = 0; i < numberOfSentences; i++) {
             paragraphText += typewriter.writeSentence();
+        }
+        // for single columns we don't add periods
+        if (numberOfSentences === 1) {
+            paragraphText = paragraphText.replace('.', '');
         }
 
         // create a textNode with the string
@@ -140,18 +143,27 @@ var typewriter = {
     write: function() {
         var sectionElement      = document.createElement('section'),
             fragment            = document.createDocumentFragment(),
-            numberOfParagraphs  = typewriter.util.randomNumber(12),
-            numberOfSentences   = typewriter.util.randomNumber(10);
+            numberOfParagraphs  = typewriter.util.randomNumber(10),
+            numberOfSentences   = 1,
+            singleColumnMode    = false;
 
         // output 1 of 2 layouts
         // 1 - single column
         //      requires the paragraphs to be just 1 sentence
+        //      increase number of possible sentences to 20
         // 2 - page layout
         // ----------------------------------------
         // 1 - single column, 50% of the time
         if (Math.random() < 0.5) {
+            singleColumnMode = true;
+
             sectionElement.className = 'single-column';
-            numberOfSentences = 1;
+
+            numberOfParagraphs = typewriter.util.randomNumber(17) + 3;
+            if (Math.random() < 0.1) {
+                numberOfParagraphs = 1;
+            }
+
             // align-content right 20% of the time
             if (Math.random() < 0.2) {
                 sectionElement.style.textAlign = 'right';
@@ -160,6 +172,12 @@ var typewriter = {
 
         // write some paragraphs
         for (var i = 0; i < numberOfParagraphs; i++) {
+            if (singleColumnMode) {
+                numberOfSentences = 1;
+            } else {
+                numberOfSentences = typewriter.util.randomNumber(15) + 1;
+            }
+
             fragment.appendChild(typewriter.writeParagraph(numberOfSentences));
         }
 
