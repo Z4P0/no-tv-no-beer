@@ -152,6 +152,8 @@ var typewriter = {
         //      requires the paragraphs to be just 1 sentence
         //      increase number of possible sentences to 20
         // 2 - page layout
+        //  A   regular, flush left
+        //  B   with indetned paragrapphs
         // ----------------------------------------
         // 1 - single column, 50% of the time
         if (Math.random() < 0.5) {
@@ -183,6 +185,12 @@ var typewriter = {
 
         // add to section element, which adds margin-bottom
         sectionElement.appendChild(fragment);
+
+        if (!singleColumnMode) {
+            if (Math.random() < 0.5) {
+                sectionElement.className = 'indented-paragraphs';
+            }
+        }
 
         // add them to the page
         typewriter.target.appendChild(sectionElement);

@@ -5,6 +5,8 @@ Page with endless paragraphs of text, based on The Shining
 --
 
 notes:
+√ periods only in paragraphs of text
+
 √ add typos
   √   multiple letters:         mmakes, pllay, plaay, Alll
   √   mixed type case:          PLay, and NO play, JACa
@@ -27,8 +29,6 @@ notes:
   √ block level
   "makes" where the "a" is above the baseline
 
-- periods only in paragraphs of text
-  > requires knowing "context"
 
 - different layouts
   > sets the "context"
