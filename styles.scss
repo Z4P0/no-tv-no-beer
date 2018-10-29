@@ -6,13 +6,20 @@ html {
   color: #555;
 }
 
-section {
-  margin: 0 5vw 5vh;
+body {
+  padding-top: 33vh;
 }
 
-// .container {
-//   padding: 1rem;
-//   max-width: 40rem;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
+section {
+  padding: 0 5vw 5vh;
+}
+
+p {
+  margin-top: 0;
+}
+
+.single-column {
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -109,9 +109,8 @@ var typewriter = {
         return sentence
     },
     // a paragraph is the string * [1-8]
-    writeParagraph: function() {
-        var numberOfSentences   = typewriter.util.randomNumber(8),
-            paragraphElement    = document.createElement('p'),
+    writeParagraph: function(numberOfSentences) {
+        var paragraphElement    = document.createElement('p'),
             paragraphText       = '',
             textNode;
 
@@ -141,11 +140,27 @@ var typewriter = {
     write: function() {
         var sectionElement      = document.createElement('section'),
             fragment            = document.createDocumentFragment(),
-            numberOfParagraphs  = typewriter.util.randomNumber(12);
+            numberOfParagraphs  = typewriter.util.randomNumber(12),
+            numberOfSentences   = typewriter.util.randomNumber(10);
+
+        // output 1 of 2 layouts
+        // 1 - single column
+        //      requires the paragraphs to be just 1 sentence
+        // 2 - page layout
+        // ----------------------------------------
+        // 1 - single column, 50% of the time
+        if (Math.random() < 0.5) {
+            sectionElement.className = 'single-column';
+            numberOfSentences = 1;
+            // align-content right 20% of the time
+            if (Math.random() < 0.2) {
+                sectionElement.style.textAlign = 'right';
+            }
+        }
 
         // write some paragraphs
         for (var i = 0; i < numberOfParagraphs; i++) {
-            fragment.appendChild(typewriter.writeParagraph());
+            fragment.appendChild(typewriter.writeParagraph(numberOfSentences));
         }
 
         // add to section element, which adds margin-bottom
