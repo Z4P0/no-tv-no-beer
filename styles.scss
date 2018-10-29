@@ -29,3 +29,30 @@ p {
     text-indent: 2rem;
   }
 }
+
+%layout-p {
+  margin-bottom: 1.5rem;
+}
+.layout-1 {
+  p:nth-child(2n+3) {
+    @extend %layout-p;
+    margin-left: 20vw;
+    margin-right: 15vw;
+  }
+}
+
+.layout-2 {
+  p:nth-child(3n+1) {
+    @extend %layout-p;
+    margin-left: 40vw;
+    margin-right: 10vw;
+  }
+}
+
+.layout-3 {
+  p:nth-child(2n+1) {
+    @extend %layout-p;
+    margin-right: 40vw;
+    margin-left: 10vw;
+  }
+}

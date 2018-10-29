@@ -130,11 +130,9 @@ var typewriter = {
 
         // mess with the style
         // ----------------------------------------
-        var random = Math.random();
-        if (random < 0.3) {
+        if (Math.random() < 0.3) {
             // line-height:
             paragraphElement.style.lineHeight = Math.random() + 0.5;
-
         }
 
         return paragraphElement;
@@ -183,12 +181,22 @@ var typewriter = {
             fragment.appendChild(typewriter.writeParagraph(numberOfSentences));
         }
 
+        // style the entire section element
+        // ----------------------------------------
         // add to section element, which adds margin-bottom
         sectionElement.appendChild(fragment);
+        if (Math.random() < 0.2) {
+            // line-height:
+            sectionElement.style.lineHeight = Math.random() + 0.8;
+        }
 
         if (!singleColumnMode) {
-            if (Math.random() < 0.5) {
+            if (Math.random() < 0.3) {
                 sectionElement.className = 'indented-paragraphs';
+            } else {
+                if (Math.random() < 0.5) {
+                    sectionElement.className = 'layout-' + typewriter.util.randomNumber(3);
+                }
             }
         }
 
@@ -197,7 +205,7 @@ var typewriter = {
     },
     util: {
         randomNumber: function(max) {
-            return Math.floor(Math.random() * (max - 1)) + 1;
+            return Math.ceil(Math.random() * (max - 1)) + 1;
         },
         randomLetter: function() {
             return typewriter.letters[
@@ -211,7 +219,6 @@ function scrollEventHandler(scrollPosition) {
     var position = Math.floor(scrollPosition + innerHeight);
 
     if (position >= document.body.scrollHeight * 0.9) {
-        console.log('write');
         typewriter.write();
     }
 }
