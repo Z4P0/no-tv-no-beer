@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('heeeeerree\'s Johnny!');
+console.log('heeeeerree\'s Homie!');
 
 
 // scroll tracking variables
@@ -13,8 +13,8 @@ var ticking = false,
 var typewriter = {
     letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
     punctuation: ['.', ',', '!', '?', '...', ''],
-    words: ['All', 'work', 'and', 'no', 'play', 'makes', 'Johnny', 'a', 'dull', 'boy', '.'],
-    completeSentence: 'All work and no play makes Johnny a dull boy.\u00A0\u00A0',
+    words: ['No', 'TV', 'and', 'no', 'beer', 'make', 'Homer', 'go', 'crazy', '.'],
+    completeSentence: 'No TV and no beer make Homer go crazy.\u00A0\u00A0',
 
     writeNewWord: function(startingWord) {
         var newWord = startingWord,
